@@ -1,0 +1,12 @@
+{
+  "name": "wl-ts",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+
+  },
+  "keywords": [],
+  "author": "HumanDuck23",
+  "license": "MIT",
+  "type": "module"
+}
