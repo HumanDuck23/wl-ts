@@ -49,6 +49,7 @@ export type StopGroup = {
     longitude: number,
     latitude: number,
     stops: number[], // stop IDs
+    lines: number[]
 }
 
 /**

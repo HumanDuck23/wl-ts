@@ -144,6 +144,7 @@ function readStopPoints() {
  * and store them.
  */
 function readStopGroups() {
+    const stopMap = readStopMap()
     const divaMap = new Map<number, Set<number>>()
     for (const stopPoint of data.stopPoints) {
         if (!divaMap.has(stopPoint.diva)) divaMap.set(stopPoint.diva, new Set<number>())
@@ -160,8 +161,16 @@ function readStopGroups() {
             municipalityId: toInt(record["MunicipalityID"], "MunicipalityID"),
             longitude: toFloat(record["Longitude"], "Longitude"),
             latitude: toFloat(record["Latitude"], "Latitude"),
-            stops: Array.from(divaMap.get(diva) ?? [])
+            stops: Array.from(divaMap.get(diva) ?? []),
+            lines: []
         }
+        const lines = new Set<number>()
+        for (const stop of stopGroup.stops) {
+            for (const line of stopMap.get(stop) ?? []) {
+                lines.add(line)
+            }
+        }
+        stopGroup.lines = Array.from(lines)
         data.stopGroups.push(stopGroup)
     }
 }
