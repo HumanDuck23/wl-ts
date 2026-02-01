@@ -36,4 +36,23 @@ describe("test static data", () => {
         expect(kpPoints.length).toBeGreaterThan(0)
         expect(kpPoints.includes(karlsplatz!!)).toBeTruthy()
     })
+
+    it("full stop information from static data", () => {
+        // @ts-ignore
+        const api = new WLApi(jsonData)
+
+        const vt = api.getStopPoints().find(s => s.name.includes("Volkstheater"))
+        expect(vt).toBeTruthy()
+
+        const vtg = api.getStopGroupByDiva(vt!!.diva)
+        expect(vtg).toBeTruthy()
+
+        console.log(`===== ${vtg!!.name} (${vtg!!.municipality}) =====`)
+
+        const lines = vtg!!.lines.map(l => api.getLineById(l)).map(l => l?.name)
+        console.log(`- Lines [${lines.length}]: ${lines.join(", ")}`)
+
+        const stopPoints = vtg!!.stops.map(s => api.getStopPointById(s)).map(s => s?.name)
+        console.log(`- Stops [${stopPoints.length}]: ${stopPoints.join(", ")}`)
+    })
 })
