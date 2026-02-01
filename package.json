@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "gen": "tsx scripts/generate-json.ts"
+    "gen": "tsx scripts/generate-json.ts",
+    "test": "vitest run"
   },
   "keywords": [],
   "author": "HumanDuck23",
