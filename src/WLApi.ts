@@ -1,6 +1,5 @@
 import { Line, StopGroup, StopPoint, WLData } from "./types/static"
 import { WienerLinienResponse, WienerLinienResponseSchema } from "./types/realtime"
-import { setInterval } from "node:timers"
 
 type Listener = (data: WienerLinienResponse) => void
 
@@ -82,9 +81,7 @@ export class WLApi {
         if (this.updateInterval !== null) return
         if (pollingRate < 15) console.error(`Please use a polling rate of 15+ seconds!`)
         else {
-            console.log("starting polling x2")
             this.updateInterval = setInterval(() => {
-                console.log("polling")
                 this.poll()
             }, pollingRate * 1000)
         }
