@@ -1,13 +1,21 @@
 {
   "name": "wl-ts",
   "version": "0.1.0",
-  "description": "",
+  "description": "Wiener Linien API (static data & realtime)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
     "gen": "tsx scripts/generate-json.ts",
     "test": "vitest run",
     "test:realtime": "LIVE=1 vitest run"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HumanDuck23/wl-ts.git"
+  },
+  "keywords": ["wiener linien"],
   "author": "HumanDuck23",
   "license": "MIT",
   "type": "module",
