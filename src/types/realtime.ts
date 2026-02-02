@@ -94,4 +94,9 @@ export const WienerLinienResponseSchema = z.object({
     })
 })
 
+export type TrafficInfoCategory = z.infer<typeof TrafficInfoCategorySchema>
+export type TrafficInfo = z.infer<typeof TrafficInfoSchema>
+export type Departure = z.infer<typeof DepartureSchema>
+export type MonitoredLine = z.infer<typeof MonitoredLineSchema>
+export type StopMonitor = z.infer<typeof StopMonitorSchema>
 export type WienerLinienResponse = z.infer<typeof WienerLinienResponseSchema>
