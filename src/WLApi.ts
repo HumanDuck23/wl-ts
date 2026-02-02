@@ -3,6 +3,10 @@ import { WienerLinienResponse, WienerLinienResponseSchema } from "./types/realti
 
 type Listener = (data: WienerLinienResponse) => void
 
+type ApiOptions = {
+    realtimeUrl: string
+}
+
 /**
  * The Wiener Linien API class.
  * This class wraps the static JSON
@@ -26,7 +30,9 @@ export class WLApi {
     private updateInterval: NodeJS.Timeout | null = null
     private listeners: Set<Listener> = new Set()
 
-    constructor(private readonly data: WLData) {
+    constructor(private readonly data: WLData, private readonly opts: ApiOptions = {
+        realtimeUrl: "https://www.wienerlinien.at/ogd_realtime/monitor"
+    }) {
         // Create maps and arrays for faster accessing
         this.lines = data.lines
         this.linesById = new Map(this.lines.map(l => [l.id, l]))
@@ -102,7 +108,6 @@ export class WLApi {
      * @private
      */
     private poll() {
-        const url = "https://www.wienerlinien.at/ogd_realtime/monitor"
         const params = new URLSearchParams()
         params.append("activateTrafficInfo", "stoerunglang")
         params.append("activateTrafficInfo", "stoerungkurz")
@@ -114,7 +119,7 @@ export class WLApi {
             params.append("diva", monitoredDiva.toString())
         }
 
-        const finalUrl = `${url}?${params.toString()}`
+        const finalUrl = `${this.opts.realtimeUrl}?${params.toString()}`
         fetch(finalUrl, {
             method: "GET",
             headers: {
