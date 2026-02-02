@@ -2,7 +2,7 @@ import { parse } from "csv-parse/sync"
 import * as path from "node:path"
 import * as fs from "node:fs"
 
-import { Line, StopGroup, StopPoint, WLData } from "../src/types"
+import { Line, StopGroup, StopPoint, WLData } from "../src/types/static"
 
 const files = {
     lines: "lines.csv",

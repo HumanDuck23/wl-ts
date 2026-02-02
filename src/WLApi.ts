@@ -1,4 +1,4 @@
-import { Line, StopGroup, StopPoint, WLData } from "./types"
+import { Line, StopGroup, StopPoint, WLData } from "./types/static"
 
 /**
  * The Wiener Linien API class.
